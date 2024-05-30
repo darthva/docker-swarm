@@ -1,6 +1,6 @@
   services:
     web:
-      image: anirudhvasu/demoapp:v1.0.10
+      image: anirudhvasu/demoapp:v1.0.11
       ports:
         - "4200:4200"
       healthcheck:
