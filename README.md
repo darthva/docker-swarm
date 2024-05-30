@@ -1,0 +1,1 @@
+Simple Python application in a docker conatiner using docker swarm

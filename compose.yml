@@ -1,0 +1,19 @@
+  services:
+    web:
+      image: anirudhvasu/demoapp:v1.0.10
+      ports:
+        - "4200:4200"
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:4200"]
+        interval: 5m
+        timeout: 10s
+        retries: 3
+        start_period: 60s
+    redis:
+      image: redis:alpine
+      volumes:
+        - demoapp:/data
+      deploy:
+        replicas: 1
+  volumes:
+    demoapp:
