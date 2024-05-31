@@ -18,5 +18,5 @@ jobs:
       run: docker build -t anirudhvasu/demoapp:$(date +%s) .
 
     - name: push the Docker image
-      run: docker push anirudh/demoapp:$(date +%s)
+      run: docker push anirudhvasu/demoapp:$(date +%s)
     
