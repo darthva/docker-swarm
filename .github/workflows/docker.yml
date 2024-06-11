@@ -24,7 +24,7 @@ jobs:
     - id: slack
       uses: slackapi/slack-github-action@v1.26.0
       with:
-        channel-id: ${{slackid-${{ steps.extract_branch.outputs.branch }}}}
+        channel-id: ${{ env.slackid-${{ steps.extract_branch.outputs.branch }}}}
         payload: |
           {
             "attachments": [
