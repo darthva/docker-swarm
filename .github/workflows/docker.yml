@@ -20,7 +20,7 @@ jobs:
         channel-id: "C046Y9JBJ92"
         payload: |
           {
-            "text": "Deployment started (In Progress)",
+            "text": "Deployment started (In Progress)-1",
             "attachments": [
               {
                 "pretext": "Deployment started",
