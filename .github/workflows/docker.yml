@@ -69,7 +69,7 @@ jobs:
             "text": "Deployment started (In Progress)",
             "attachments": [
               {
-                "pretext": "Deployment started",
+                "pretext": "Deployment started win",
                 "color": "dbab09",
                 "fields": [
                   {
