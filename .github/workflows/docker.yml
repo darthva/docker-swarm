@@ -25,7 +25,7 @@ jobs:
           {
             "attachments": [
               {
-                "pretext": "Deployment started: ${{ steps.extract_branch.outputs.branch }",
+                "pretext": "Deployment started: ${{ steps.extract_branch.outputs.branch }}",
                 "color": "dbab09",
                 "fields": [
                   {
@@ -60,7 +60,7 @@ jobs:
           {
             "attachments": [
               {
-                "pretext": "Deployment finished: ${{ steps.extract_branch.outputs.branch }",
+                "pretext": "Deployment finished: ${{ steps.extract_branch.outputs.branch }}",
                 "color": "28a745",
                 "fields": [
                   {
