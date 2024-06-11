@@ -12,6 +12,34 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+
+    - name: slack notify in progress
+    - id: slack
+      uses: slackapi/slack-github-action@v1.26.0
+      with:
+        # The following message update step does not accept a channel name.
+        # Setting a channel ID here for consistency is highly recommended.
+        channel-id: "C046Y9JBJ92"
+        payload: |
+          {
+            "text": "Deployment started (In Progress)",
+            "attachments": [
+              {
+                "pretext": "Deployment started",
+                "color": "dbab09",
+                "fields": [
+                  {
+                    "title": "Status",
+                    "short": true,
+                    "value": "In Progress"
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
     - name: Build the Docker image
       run: docker build -t anirudhvasu/demoapp:$GITHUB_SHA .
 
@@ -24,11 +52,12 @@ jobs:
     - name: push the Docker image
       run: docker push anirudhvasu/demoapp:$GITHUB_SHA
     
-    # - name: Extract branch name
-    #   shell: bash
-    #   run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-    #   id: extract_branch
+    - name: Extract branch name
+      shell: bash
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
 
+    - name: slack update in progress
     - id: slack
       uses: slackapi/slack-github-action@v1.26.0
       with:
