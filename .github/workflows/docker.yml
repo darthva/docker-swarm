@@ -34,7 +34,7 @@ jobs:
       with:
         status: ${{ job.status }}
         text: Successful build of ${{ github.ref }} by ${{ github.actor }} in ${{ steps.extract_branch.outputs.branch }}
-        webhook_url: ${{ secrets.WEBHOOK_MAIN }}
+        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
         if_mention: mentions,failure,cancelled,success
         if_failing: true
         if_success: true
