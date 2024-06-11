@@ -15,8 +15,6 @@ jobs:
     - id: slack
       uses: slackapi/slack-github-action@v1.26.0
       with:
-        # The following message update step does not accept a channel name.
-        # Setting a channel ID here for consistency is highly recommended.
         channel-id: "C046Y9JBJ92"
         payload: |
           {
