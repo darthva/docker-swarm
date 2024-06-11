@@ -13,7 +13,6 @@ jobs:
     - uses: actions/checkout@v2
 
 
-    - name: slack notify in progress
     - id: slack
       uses: slackapi/slack-github-action@v1.26.0
       with:
@@ -56,8 +55,7 @@ jobs:
       shell: bash
       run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
       id: extract_branch
-
-    - name: slack update in progress
+      
     - id: slack
       uses: slackapi/slack-github-action@v1.26.0
       with:
