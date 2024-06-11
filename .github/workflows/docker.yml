@@ -18,7 +18,7 @@ jobs:
         channel-id: "C046Y9JBJ92"
         payload: |
           {
-            "text": "Deployment started (In Progress)-2",
+            "text": "Deployment started (In Progress",
             "attachments": [
               {
                 "pretext": "Deployment started",
@@ -50,8 +50,6 @@ jobs:
     
     - uses: slackapi/slack-github-action@v1.26.0
       with:
-        # Unlike the step posting a new message, this step does not accept a channel name.
-        # Please use a channel ID, not a name here.
         channel-id: "C046Y9JBJ92"
         update-ts: ${{ steps.slack.outputs.ts }}
         payload: |
