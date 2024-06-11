@@ -6,7 +6,7 @@ on:
 env:
   REGISTRY: anirudhvasu
   IMAGE_NAME: demoapp
-  slackid-main: C046Y9JBJ92
+  SLACK_ID_MAIN: C046Y9JBJ92
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
     - id: slack
       uses: slackapi/slack-github-action@v1.26.0
       with:
-        channel-id: ${{ env.slackid-${{ steps.extract_branch.outputs.branch }}}}
+        channel-id: ${SLACK_ID_MAIN}
         payload: |
           {
             "attachments": [
