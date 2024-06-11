@@ -62,19 +62,19 @@ jobs:
     
     - uses: slackapi/slack-github-action@v1.26.0
       with:
-        channel-id: "C046Y9JBJ92"
+        channel-id: ${{fromJson(env.SLACK_CHANNEL_MAP)[steps.extract_branch.outputs.branch]}}
         update-ts: ${{ steps.slack.outputs.ts }}
         payload: |
           {
             "attachments": [
               {
                 "pretext": "Deployment finished: ${{ steps.extract_branch.outputs.branch }}",
-                "color": "28a745",
+                "color": "${{ job.status == 'success' && '28a745' || 'e01563' }}",
                 "fields": [
                   {
                     "title": "Status",
                     "short": true,
-                    "value": "Completed"
+                    "value": "${{ job.status == 'success' && 'Completed' || 'Failed' }}"
                   }
                 ]
               }
