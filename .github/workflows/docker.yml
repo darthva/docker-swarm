@@ -24,3 +24,26 @@ jobs:
     - name: push the Docker image
       run: docker push anirudhvasu/demoapp:$GITHUB_SHA
     
+    - name: Extract branch name
+      shell: bash
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
+
+    - name: Slack Notification
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        text: Successful build of ${{ github.ref }} by ${{ github.actor }} in ${{ steps.extract_branch.outputs.branch }}
+        webhook_url: ${{ secrets.WEBHOOK_MAIN }}
+        if_mention: mentions,failure,cancelled,success
+        if_failing: true
+        if_success: true
+        if_cancelled: true
+        mention: here
+        username: GitHub Actions
+        icon_emoji: ':github:'
+        channel: github-pr
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: always()
+    
