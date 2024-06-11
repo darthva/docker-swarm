@@ -24,26 +24,59 @@ jobs:
     - name: push the Docker image
       run: docker push anirudhvasu/demoapp:$GITHUB_SHA
     
-    - name: Extract branch name
-      shell: bash
-      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-      id: extract_branch
+    # - name: Extract branch name
+    #   shell: bash
+    #   run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+    #   id: extract_branch
 
-    - name: Slack Notification
-      uses: 8398a7/action-slack@v3
+    - id: slack
+      uses: slackapi/slack-github-action@v1.26.0
       with:
-        status: ${{ job.status }}
-        text: Successful build of ${{ github.ref }} by ${{ github.actor }} in ${{ steps.extract_branch.outputs.branch }}
-        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if_mention: mentions,failure,cancelled,success
-        if_failing: true
-        if_success: true
-        if_cancelled: true
-        mention: here
-        username: GitHub Actions
-        icon_emoji: ':github:'
-        channel: github-pr
+        # The following message update step does not accept a channel name.
+        # Setting a channel ID here for consistency is highly recommended.
+        channel-id: "C046Y9JBJ92"
+        payload: |
+          {
+            "text": "Deployment started (In Progress)",
+            "attachments": [
+              {
+                "pretext": "Deployment started",
+                "color": "dbab09",
+                "fields": [
+                  {
+                    "title": "Status",
+                    "short": true,
+                    "value": "In Progress"
+                  }
+                ]
+              }
+            ]
+          }
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      if: always()
-    
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    - uses: slackapi/slack-github-action@v1.26.0
+      with:
+        # Unlike the step posting a new message, this step does not accept a channel name.
+        # Please use a channel ID, not a name here.
+        channel-id: "C046Y9JBJ92"
+        update-ts: ${{ steps.slack.outputs.ts }}
+        payload: |
+          {
+            "text": "Deployment finished (Completed)",
+            "attachments": [
+              {
+                "pretext": "Deployment finished",
+                "color": "28a745",
+                "fields": [
+                  {
+                    "title": "Status",
+                    "short": true,
+                    "value": "Completed"
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        
