@@ -11,6 +11,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2 
+
+    - name: Extract branch name
+      shell: bash
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
     
     - id: slack
       uses: slackapi/slack-github-action@v1.26.0
@@ -20,7 +25,7 @@ jobs:
           {
             "attachments": [
               {
-                "pretext": "Deployment started",
+                "pretext": "Deployment started: ${{ steps.extract_branch.outputs.branch }",
                 "color": "dbab09",
                 "fields": [
                   {
@@ -55,7 +60,7 @@ jobs:
           {
             "attachments": [
               {
-                "pretext": "Deployment finished",
+                "pretext": "Deployment finished: ${{ steps.extract_branch.outputs.branch }",
                 "color": "28a745",
                 "fields": [
                   {
@@ -71,7 +76,3 @@ jobs:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}      
 
     
-    - name: Extract branch name
-      shell: bash
-      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-      id: extract_branch
