@@ -9,10 +9,10 @@ env:
   SLACK_CHANNEL_MAP: |
     {
       "main":{
-        slack: "C046Y9JBJ92"
+        "slack": "C046Y9JBJ92"
       }
       "develop":{
-        slack: "C046Y9JBJ93"
+        "slack": "C046Y9JBJ93"
       }
     }
 
