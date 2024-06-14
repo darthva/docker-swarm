@@ -32,7 +32,7 @@ jobs:
     - id: slack
       uses: slackapi/slack-github-action@v1.26.0
       with:
-        channel-id: ${{fromJson(env.SLACK_CHANNEL_MAP.${{ steps.extract_branch.outputs.branch }}.slack)}}
+        channel-id: ${{fromJson(env.SLACK_CHANNEL_MAP.main.slack)}}
         payload: |
           {
             "attachments": [
