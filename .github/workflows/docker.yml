@@ -37,7 +37,7 @@ jobs:
           {
             "attachments": [
               {
-                "pretext": "Deployment started: ${{ steps.extract_branch.outputs.branch }} $GITHUB_SHA ",
+                "pretext": "Deployment started: ${{ steps.extract_branch.outputs.branch }} ${{ GITHUB_SHA }} ",
                 "color": "dbab09",
                 "fields": [
                   {
@@ -72,7 +72,7 @@ jobs:
           {
             "attachments": [
               {
-                "pretext": "Deployment finished: ${{ steps.extract_branch.outputs.branch }} $GITHUB_SHA",
+                "pretext": "Deployment finished: ${{ steps.extract_branch.outputs.branch }} ${{ GITHUB_SHA }}",
                 "color": "${{ job.status == 'success' && '28a745' || 'e01563' }}",
                 "fields": [
                   {
