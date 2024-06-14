@@ -8,10 +8,10 @@ env:
   IMAGE_NAME: demoapp
   SLACK_CHANNEL_MAP: |
     {
-      "main":{
+      "main": {
         "slack": "C046Y9JBJ92"
-      }
-      "develop":{
+      },
+      "develop": {
         "slack": "C046Y9JBJ93"
       }
     }
